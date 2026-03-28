@@ -3,146 +3,84 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>SAMU TV Miracle</title>
+<title>SAMU TV KENYA</title>
 <style>
-body { font-family: Arial; background: #111; color: #fff; margin: 0; padding: 0;}
-header { background: #ff6600; padding: 20px; text-align: center; font-size: 24px; font-weight: bold;}
-section { padding: 20px; }
-h2 { color: #ff6600; }
-#livePlayer { display:flex; justify-content:center; margin:20px 0; }
-iframe, video { width: 80%; max-width: 900px; height: 500px; border: 3px solid #ff6600; border-radius:10px; }
-#channels, #templates, #merch { display:flex; gap:20px; flex-wrap:wrap; justify-content:center; margin-bottom:30px; }
-.btn { background:#222; color:#fff; padding:10px 20px; border:2px solid #ff6600; border-radius:8px; cursor:pointer; transition:0.3s; }
-.btn:hover { background:#ff6600; color:#111; }
-.item { text-align:center; }
-.item img, .item video { width: 250px; height: 140px; margin-bottom:10px; border-radius:8px; }
-footer { text-align:center; padding:15px; background:#222; margin-top:20px; color:#fff; }
+/* Basic Styles */
+body { font-family: Arial, sans-serif; margin:0; background:#f2f2f2; color:#333; }
+header { background:#002147; color:#fff; text-align:center; padding:20px; font-size:24px; font-weight:bold; }
+nav { background:#004080; text-align:center; padding:10px; }
+nav a { color:#fff; margin:0 15px; text-decoration:none; font-weight:bold; }
+.ticker { background:#000; color:#0ff; padding:8px; text-align:center; }
+.live-container { position:relative; padding-top:56.25%; margin:20px 0; }
+.live-container iframe { position:absolute; width:100%; height:100%; border:0; }
+.controls { text-align:center; margin:10px; }
+button { padding:10px 15px; margin:5px; background:red; color:#fff; border:none; border-radius:5px; cursor:pointer; }
+.grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:10px; padding:10px; }
+.grid iframe { width:100%; height:150px; border:0; }
+footer { background:#002147; color:#fff; text-align:center; padding:15px; margin-top:20px; }
+
+/* Floating WhatsApp & PayPal Buttons */
+.floating-buttons { position: fixed; bottom: 20px; right: 20px; display:flex; flex-direction:column; gap:10px; z-index:999; }
+.floating-buttons a { display:flex; align-items:center; justify-content:center; width:60px; height:60px; border-radius:50%; color:#fff; font-size:28px; text-decoration:none; box-shadow:0 4px 8px rgba(0,0,0,0.3); overflow:hidden; transition:0.3s; position:relative; }
+.floating-buttons a span.label { position:absolute; right:100%; white-space:nowrap; background:#222; color:#fff; padding:8px 12px; border-radius:8px; opacity:0; pointer-events:none; transition:0.3s; font-size:14px; }
+.floating-buttons a.whatsapp { background:#25D366; }
+.floating-buttons a.paypal { background:#003087; }
+.floating-buttons a:hover { width:auto; padding:0 20px 0 10px; }
+.floating-buttons a:hover span.label { opacity:1; right:70px; }
 </style>
 </head>
 <body>
 
-<header>SAMU TV Miracle</header>
+<header>SAMU TV KENYA</header>
 
-<section>
-<h2>📡 Live Channels</h2>
-<div id="livePlayer">
-  <iframe id="player" src="https://www.youtube.com/embed/videoseries?list=PLazHNRREZJPvUAMd3K2HuSqxZJVSR5BdU&autoplay=1&mute=1" frameborder="0" allowfullscreen></iframe>
+<nav>
+<a href="#">Home</a>
+<a href="#">About</a>
+<a href="#">Privacy</a>
+<a href="#">Terms</a>
+</nav>
+
+<div class="ticker">🔴 SAMU TV KENYA LIVE 24/7 | News • Music • Entertainment</div>
+
+<div class="live-container">
+  <iframe id="player" src="https://www.youtube.com/embed/videoseries?list=PLazHNRREZJPvUAMd3K2HuSqxZJVSR5BdU&autoplay=1&mute=1" allowfullscreen></iframe>
 </div>
-<div id="channels"></div>
-</section>
 
-<section>
-<h2>🎬 Templates Marketplace</h2>
-<div id="templates"></div>
-</section>
-
-<section>
-<h2>🛒 Merch Products</h2>
-<div id="merch">
-  <div class="item">
-    <img src="products/tshirt.jpg" alt="Samu TV T-Shirt">
-    <div>T-Shirt - $15</div>
-    <button class="btn" onclick="buyMerch('T-Shirt', 'paypal')">PayPal</button>
-    <button class="btn" onclick="buyMerch('T-Shirt', 'mpesa')">M-Pesa</button>
-    <button class="btn" onclick="updateWhatsApp('T-Shirt', 15)">WhatsApp Order</button>
-  </div>
-  <div class="item">
-    <img src="products/hat.jpg" alt="Samu TV Hat">
-    <div>Hat - $10</div>
-    <button class="btn" onclick="buyMerch('Hat', 'paypal')">PayPal</button>
-    <button class="btn" onclick="buyMerch('Hat', 'mpesa')">M-Pesa</button>
-    <button class="btn" onclick="updateWhatsApp('Hat', 10)">WhatsApp Order</button>
-  </div>
+<div class="controls">
+  <button onclick="goFull()">Fullscreen</button>
+  <button onclick="unmute()">Sound</button>
 </div>
-</section>
 
-<a id="whatsappBtn" href="https://wa.me/254700123456?text=Hi%20Samu%20TV!" 
-   style="position:fixed; bottom:20px; right:20px; background:#25D366; color:#fff; padding:15px 20px; border-radius:50px; font-weight:bold; text-decoration:none; box-shadow:0 5px 10px rgba(0,0,0,0.3); z-index:9999; display:flex; align-items:center; gap:10px; font-size:16px;" target="_blank">
-  📲 Order Now
-</a>
+<h2 style="text-align:center;">🔥 Featured Videos</h2>
+<div class="grid">
+  <iframe src="https://www.youtube.com/embed/videoseries?list=PLazHNRREZJPvUAMd3K2HuSqxZJVSR5BdU" allowfullscreen></iframe>
+  <iframe src="https://www.youtube.com/embed/videoseries?list=PLazHNRREZJPvUAMd3K2HuSqxZJVSR5BdU" allowfullscreen></iframe>
+</div>
 
 <footer>
-© 2026 SAMU TV Miracle | Email: info@samutvkenya.co.ke
+© 2026 SAMU TV KENYA | Email: info@samutvkenya.co.ke
 </footer>
 
-<script src="https://js.stripe.com/v3/"></script>
+<!-- Floating Buttons -->
+<div class="floating-buttons">
+  <a href="https://wa.me/254759821389" target="_blank" class="whatsapp" title="Chat on WhatsApp">
+    💬 <span class="label">Chat on WhatsApp</span>
+  </a>
+  <a href="https://www.paypal.com/paypalme/smugo953" target="_blank" class="paypal" title="Pay with PayPal">
+    💳 <span class="label">Pay with PayPal</span>
+  </a>
+</div>
 
 <script>
-// WhatsApp number
-const whatsappNumber = "254700123456"; 
-let lastProduct = null;
-
-// Floating WhatsApp update
-function updateWhatsApp(productName, price){
-  lastProduct = { name: productName, price: price };
-  const message = `Hi Samu TV! I want to buy: ${productName} for $${price}`;
-  document.getElementById('whatsappBtn').href = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
+function goFull(){
+  let iframe=document.getElementById("player");
+  if(iframe.requestFullscreen){ iframe.requestFullscreen(); }
 }
 
-// Merch Payments
-async function buyMerch(productName, method){
-  if(method==='paypal'){
-    window.open(`https://www.paypal.com/cgi-bin/webscr?cmd=_xclick&business=YOUR_PAYPAL_EMAIL&item_name=${productName}&amount=${encodeURIComponent(lastProduct?.price || 0)}&currency_code=USD`, '_blank');
-  }
-  if(method==='mpesa'){
-    alert(`M-Pesa payment request for ${productName} initiated!`);
-  }
+function unmute(){
+  let iframe=document.getElementById("player");
+  iframe.src = iframe.src.replace("mute=1","mute=0");
 }
-
-// Templates
-const templates = [
-  { id:1, name:"Love Template", file:"templates/love_template.mp4", price:5 },
-  { id:2, name:"Reggae Template", file:"templates/reggae_template.mp4", price:3 },
-  { id:3, name:"Bongo Template", file:"templates/bongo_template.mp4", price:4 }
-];
-
-function loadTemplates() {
-  const templatesDiv = document.getElementById('templates');
-  templates.forEach(t => {
-    const div = document.createElement('div');
-    div.className = 'item';
-    div.innerHTML = `
-      ${t.name} - $${t.price} <br>
-      <button class="btn" onclick="buyTemplate(${t.id}, 'stripe')">Stripe</button>
-      <button class="btn" onclick="buyTemplate(${t.id}, 'paypal')">PayPal</button>
-      <button class="btn" onclick="updateWhatsApp('${t.name}', ${t.price})">WhatsApp Order</button>
-    `;
-    templatesDiv.appendChild(div);
-  });
-}
-
-// Stripe / PayPal Checkout
-async function buyTemplate(templateId, method){
-  const template = templates.find(t=>t.id===templateId);
-  if(method==='stripe'){
-    const session = await fetch(`https://YOUR_BACKEND_URL/stripe/create-checkout-session`, {
-      method:'POST',
-      headers:{'Content-Type':'application/json'},
-      body: JSON.stringify({ templateId })
-    }).then(r=>r.json());
-    const stripe = Stripe("YOUR_STRIPE_PUBLIC_KEY");
-    stripe.redirectToCheckout({ sessionId: session.id });
-  } else if(method==='paypal'){
-    window.open(`https://www.paypal.com/cgi-bin/webscr?cmd=_xclick&business=YOUR_PAYPAL_EMAIL&item_name=${template.name}&amount=${template.price}&currency_code=USD&return=${encodeURIComponent(window.location.href + "?success=1&template=" + templateId)}`, '_blank');
-  }
-}
-
-// Auto-download template after successful checkout
-const urlParams = new URLSearchParams(window.location.search);
-if(urlParams.get("success") && urlParams.get("template")){
-  const templateId = parseInt(urlParams.get("template"));
-  const template = templates.find(t=>t.id===templateId);
-  if(template){
-    const a = document.createElement('a');
-    a.href = template.file;
-    a.download = template.file.split('/').pop();
-    a.click();
-    alert(`✅ ${template.name} downloaded successfully! Enjoy your template.`);
-  }
-}
-
-// Initialize
-loadTemplates();
 </script>
 
 </body>
