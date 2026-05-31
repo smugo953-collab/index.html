@@ -416,9 +416,9 @@ data-full-width-responsive="true"></ins>
 
 <h2 style="text-align:center">🔥 Featured Videos</h2>
 
-<div class="grid">
-<iframe src="https://www.youtube.com/embed/videoseries?list=PLazHNRREZJPvUAMd3K2HuSqxZJVSR5BdU"></iframe>
-<iframe src="https://www.youtube.com/embed/videoseries?list=PLazHNRREZJPvUAMd3K2HuSqxZJVSR5BdU"></iframe><iframe src="https://www.youtube.com/embed/videoseries?list=UUH0PHj-aHyK-pcnnGM1YIIw"></iframe>
+<div class="grid"><iframe
+src="https://www.youtube.com/embed/videoseries?list=UUH0PHj-aHyK-pcnnGM1YIIw">
+</iframe>
 </div>
 
 <!-- 🔹 AdSense Bottom -->
@@ -446,12 +446,7 @@ data-full-width-responsive="true"></ins>
 function goFull(){
 let iframe=document.getElementById("player");
 if(iframe.requestFullscreen){iframe.requestFullscreen();}
-}
 
-function unmute(){
-let iframe=document.getElementById("player");
-iframe.src=iframe.src.replace("mute=1","mute=0");
-}
 </script>
 
 </body>
